@@ -13,22 +13,21 @@ class Solution {
 public:
     bool isSymmetric(TreeNode* root) {
         
-        if(root==NULL) return true; //T
-        
-        return isSymmetricTest(root->left,root->right);
+        if(!root) return true;
+        return symmetryUtil(root->left, root->right);
     }
     
-    bool isSymmetricTest(TreeNode* p , TreeNode* q){
-        if(p == NULL && q == NULL) //left & right node is NULL 
-            return true; 
+    bool symmetryUtil(TreeNode * root1, TreeNode * root2){
         
-        else if(p == NULL || q == NULL) //one of them is Not NULL
-            return false; 
-        
-        else if(p->val!=q->val) 
+        if(!root1 && !root2){
+            return true;
+        } if(!root1 || !root2)
             return false;
         
-        return isSymmetricTest(p->left,q->right) && isSymmetricTest(p->right,q->left); 
-        //comparing left subtree's left child with right subtree's right child --AND-- comparing left subtree's right child with right subtree's left child
+        if(root1->val != root2->val){
+            return false;
+        }
+        
+        return symmetryUtil(root1->left, root2->right) && symmetryUtil(root1->right, root2->left);        
     }
 };
