@@ -1,4 +1,5 @@
 int t[46]={0};
+
 class Solution {
 public:
     int climbStairs(int n) {
