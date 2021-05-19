@@ -1,23 +1,33 @@
-int t[46]={0};
 
 class Solution {
 public:
     int climbStairs(int n) {
-        
-       if(n==1) {
-           t[n]=1;
-           return t[n];
-       }
-        if(n==2){
-            t[n]=2;
-            return t[n];
+       int *ans=new int[n+1];
+        for(int i=0;i<=n;i++){
+            ans[i]=-1;
         }
-        if(t[n]!=0){
-            return t[n];
+        int o=cl(n,ans);
+        return o;          
+       
+        
+    }
+    int cl(int n,int *ans){
+        if(n==0){
+            ans[n]=1;
+            return ans[n];
         }
-        t[n]=climbStairs(n-1)+climbStairs(n-2);
-        return t[n];
-        
-        
+        if(n<0){
+            // ans[n]=0;
+            return 0;
+        }
+        if(ans[n]!=-1){
+            return ans[n];
+        }
+        int x=cl(n-1,ans);
+        int y=cl(n-2,ans);
+        int out=x+y;
+        ans[n]=out;
+        // return ans[n];
+        return out;
     }
 };
