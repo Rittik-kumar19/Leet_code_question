@@ -22,6 +22,26 @@ public:
                 }
             }
         }
+        int i=x;
+        int j=y;
+        string s="";
+        
+        while(i>0 && j>0){
+            if(s1[i-1]==s2[j-1]){
+                s.push_back(s1[i-1]);
+                i--;j--;
+            }
+            else{
+                if(dp[i-1][j]>dp[i][j-1]){
+                    i--;
+                }
+                else{
+                    j--;
+                }
+            }
+        }
+        reverse(s.begin(),s.end());
+        cout<<s<<endl;
         return dp[x][y];
     }
 };
