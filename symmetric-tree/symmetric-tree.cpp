@@ -11,23 +11,15 @@
  */
 class Solution {
 public:
-    bool isSymmetric(TreeNode* root) {
-        
-        if(!root) return true;
-        return symmetryUtil(root->left, root->right);
-    }
-    
-    bool symmetryUtil(TreeNode * root1, TreeNode * root2){
-        
-        if(!root1 && !root2){
+     bool isMirror(TreeNode* root1,TreeNode *root2){
+        if(root1==NULL && root2==NULL)
             return true;
-        } if(!root1 || !root2)
-            return false;
+        if(root1 && root2 && root1->val == root2->val)
+            return isMirror(root1->left,root2->right) && isMirror(root1->right,root2->left);
         
-        if(root1->val != root2->val){
-            return false;
-        }
-        
-        return symmetryUtil(root1->left, root2->right) && symmetryUtil(root1->right, root2->left);        
+        return false;
+    }
+    bool isSymmetric(TreeNode* root) {
+        return isMirror(root,root);
     }
 };
