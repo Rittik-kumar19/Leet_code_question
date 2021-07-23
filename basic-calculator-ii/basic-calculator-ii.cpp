@@ -1,48 +1,41 @@
 class Solution {
 public:
     int calculate(string s) {
-        stack<int> st;
-        int tmp(0), ans(0), num;
-        char op = '+';
-        int size = s.size();
-        for(char ch: s)
-        {
-            size--;
-            if(isdigit(ch))
-            {
-                tmp = tmp * 10 + (ch - '0');
+        int n=s.size();
+        stack<int>st;
+        int num=0;
+        char op='+';
+        for(int i=0;i<n;i++){
+            char c=s[i];
+            if(isdigit(c)){
+                num=num*10+(c-'0');
             }
-            if(!isdigit(ch) and !isspace(ch) || !size)
-            {
-                switch(op)
-                {
-                    case '+':
-                        st.push(tmp);
-                        break;
-                    case '-':
-                        st.push(-tmp);
-                        break;
-                    case '*':
-                        num = st.top();
-                        st.pop();
-                        st.push(num * tmp);
-                        break;
-                    default:
-                        num = st.top();
-                        st.pop();
-                        st.push(num / tmp);
-                        
+            if((!isdigit(c))and (!isspace(c)) || i==n-1){
+                if(op=='+'){
+                    st.push(num);
                 }
-                tmp = 0;
-                op = ch;
+                else if(op=='-'){
+                    st.push(-num);
+                }
+                else{
+                    int top=st.top();
+                    st.pop();
+                    if(op=='*'){
+                        st.push(top*num);
+                    }
+                    else{
+                        st.push(top/num);
+                    }
+                }
+                op=c;
+                num=0;
             }
         }
-        
-        while (!st.empty())
-        {
-            ans += st.top();
+        int result=0;
+        while(!st.empty()){
+            result+=st.top();
             st.pop();
         }
-        return ans; 
+        return result;
     }
 };
