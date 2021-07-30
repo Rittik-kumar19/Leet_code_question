@@ -3,9 +3,6 @@ public:
     int lengthOfLIS(vector<int>& nums) {
         int n=nums.size();
         int dp[n+1];
-        // for(int i=0;i<=n;i++){
-        //     dp[i]=0;
-        // }
         memset(dp,0,sizeof(dp));
         dp[0]=1;
         for(int i=1;i<n;i++){
@@ -20,7 +17,7 @@ public:
             dp[i]=mx+1;
         }
         int x=0;
-        for(int i=0;i<=n;i++){
+        for(int i=0;i<n;i++){
             x=max(x,dp[i]);
         }
         return x;
