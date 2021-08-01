@@ -1,12 +1,20 @@
 class Solution {
 public:
-    int fib(int n) {
-       if(n<=1) {
+    int dp[100];
+    // memset(dp,-1,sizeof(dp));
+    int fibo(int n){
+        if(n<=1){
+           dp[n]=n;
            return n;
        }
-        int sm1=fib(n-1);
-        int sm2=fib(n-2);
-        int out=sm1+sm2;
-        return out;
+       if(dp[n]!=-1){
+           return dp[n];
+       }
+       dp[n]=fib(n-1)+fib(n-2);
+       return dp[n];
+    }
+    int fib(int n) {
+        memset(dp,-1,sizeof(dp));
+        return fibo(n);
     }
 };
