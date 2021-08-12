@@ -36,6 +36,5 @@ public:
             cloned->neighbors.push_back(cloneGraph(nei));
         }
         return cloned;
-        
     }
 };
