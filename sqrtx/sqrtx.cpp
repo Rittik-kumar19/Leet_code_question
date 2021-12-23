@@ -1,16 +1,20 @@
 class Solution {
 public:
     int mySqrt(int x) {
-        long long s=0, e=x, ans, mid;   //long long due to some of test cases overflows integer limit.
-        while(s<=e){             
-            mid=(s+e)/2;
-            if(mid*mid==x) return mid;     //if the 'mid' value ever gives the result, we simply return it.
-            else if(mid*mid<x){             
-                s=mid+1;        //if 'mid' value encounterted gives lower result, we simply discard all the values lower than mid.
-                ans=mid;        //an extra pointer 'ans' is maintained to keep track of only lowest 'mid' value. 
+        long long int l=0,h=x,mid=0,ans=0;
+        while(l<=h){
+            mid=(l+(h-l)/2);
+            if(mid*mid==x){
+                return mid;
             }
-            else e=mid-1;       //if 'mid' value encountered gives greater result, we simply discard all the values greater than mid. 
+            else if(mid*mid<x){
+                ans=mid;
+                l=mid+1;
+            }
+            else if(mid*mid>x){
+                h=mid-1;
+            }
         }
-        return ans; 
+        return ans;
     }
 };
