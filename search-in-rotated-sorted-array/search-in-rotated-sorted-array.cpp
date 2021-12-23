@@ -1,60 +1,49 @@
 class Solution {
 public:
     int search(vector<int>& nums, int target) {
-        if(nums.size()==1){
-            if(nums[0]==target) return 0;
-            else return -1;
-        }
-        int pivot = minposi(nums);
-        cout<<pivot<<endl;
-        int lsa=Bs(nums,0,pivot-1,target);
-        int rsa = Bs(nums,pivot,nums.size()-1,target);
-        cout<<lsa<<endl;
-        cout<<rsa<<endl;
-        if(lsa>-1){
-            return lsa;
-        }
-        else{
-            return rsa;
+        int s = nums.size();
+        
+        if(s==1) { // corner case
+            if(nums[0]==target)
+                return 0;
+            return -1;
         }
         
-    }
-    int Bs(vector<int>& nums, int st, int end,int target){ 
-         while(st<=end){
-            int mid=st+(end-st)/2;
-            if(nums[mid]==target){
-                return mid;
+        if(nums[0]<nums[s-1])  //case when nums is already sorted.
+            return bs(nums,0,s-1,target);
+       
+        int pivot = -1;
+
+        int l=0,h=s-1;
+        
+        while(l<=h) {  //Finding pivot element
+            int m = l+(h-l)/2;
+            if(nums[m]<nums[(m+1)%s] && nums[m]<nums[(m-1+s)%s]) {
+                pivot = m;
+                break;
             }
-            else if(nums[mid]>target){
-                end=mid-1;
-            }
-            else if(nums[mid]<target){
-                st=mid+1;
-            }
+            else if(nums[m]>=nums[0] && nums[m]>=nums[s-1])
+                l = (m+1)%s;
+               
+            else
+                 h = (m-1+s)%s;
+                
         }
-        // if(i>=0 && nums[i]==target) return i;
-        // if(j>=0 && nums[j]==target) return j;
-        return -1;
+        if(target >= nums[pivot] && target <= nums[s-1])
+            return bs(nums,pivot,s-1,target);
+        
+        return bs(nums,0,pivot-1,target);
+        
     }
-    int minposi(vector<int>&nums){
-        int n=nums.size();
-        int st=0,end=nums.size()-1;
-        if(n==1){
-            return 0;
-        }
-        while(st<=end){
-            int mid = st + (end-st)/2;
-            int prev = (mid+n-1)%n;
-            int next = (mid+1)%n;
-            if(nums[mid]<nums[prev] and nums[mid]<nums[next]){
-                return mid;
-            }
-            else if(nums[end]<nums[mid]){
-                st=mid+1;
-            }
-            else {
-                end = mid-1;
-            }
+    int bs(vector<int>& nums,int l,int h,int target) { //Binary Search Function
+        while(l<=h) {
+            int m = l+(h-l)/2;
+            if(nums[m]==target)
+                return m;
+            else if(target > nums[m])
+                l = m+1;
+            else
+                h = m-1;
         }
         return -1;
     }
