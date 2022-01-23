@@ -101,46 +101,81 @@
 //Binary search
 
 
+// class Solution {
+// public:
+//     int findPairs(vector<int>& nums, int k) {
+//         int n = nums.size();
+//         sort(nums.begin(),nums.end());
+//         int ans = 0;
+//         if(k==0){
+//             int prev = nums[0];
+//             bool flag = true;
+//             for(int i=1;i<n;i++){
+//                 if(nums[i]==prev){
+//                     if(flag){
+//                         ans++;
+//                     }
+//                     flag = false;
+//                     prev=nums[i];
+//                 }
+//                 else if(nums[i]!=prev){
+//                     flag = true;
+//                     prev = nums[i];
+                
+//                 }
+//             }
+//             return ans;
+//         }
+        
+//         auto ip = unique(nums.begin(),nums.end());
+//         nums.resize(distance(nums.begin(),ip));
+//         int nn = nums.size();
+//         for(int i=0;i<nn;i++){
+//             int xx=binary_search(nums.begin(),nums.begin()+i,nums[i]-k);
+//             if(xx){
+//                 ans++;
+//             }
+//         }
+//         return ans;
+        
+//     }
+// };
+
+
 class Solution {
 public:
     int findPairs(vector<int>& nums, int k) {
-        int n = nums.size();
-        sort(nums.begin(),nums.end());
-        int ans = 0;
-        if(k==0){
-            int prev = nums[0];
-            bool flag = true;
-            for(int i=1;i<n;i++){
-                if(nums[i]==prev){
-                    if(flag){
-                        ans++;
-                    }
-                    flag = false;
-                    prev=nums[i];
-                }
-                else if(nums[i]!=prev){
-                    flag = true;
-                    prev = nums[i];
-                
-                }
-            }
-            return ans;
-        }
-        
-        auto ip = unique(nums.begin(),nums.end());
-        nums.resize(distance(nums.begin(),ip));
-        int nn = nums.size();
-        for(int i=0;i<nn;i++){
-            int xx=binary_search(nums.begin(),nums.begin()+i,nums[i]-k);
-            if(xx){
-                ans++;
-            }
-        }
-        return ans;
+     // map<int,int>mp;
+        set<int>mp;
+     // for(auto np:nums){
+     //     mp[np]++;
+     // }
+     set<pair<int,int>>s;
+     int ans =0;
+     for(int i=0;i<nums.size();i++){
+         int x = nums[i]+k;
+         int y = nums[i]-k;
+         if(mp.count(x)){
+             if((s.count({x,nums[i]})==0) and (s.count({nums[i],x})==0)){
+                 ans++;
+             }
+             s.insert({x,nums[i]});
+             s.insert({nums[i],x});
+         }
+         if(mp.count(y)){
+             if((s.count({y,nums[i]})==0) and (s.count({nums[i],y})==0)){
+                 ans++;
+             }
+             s.insert({y,nums[i]});
+             s.insert({nums[i],y});
+         }
+         mp.insert(nums[i]);
+     }
+    
+    return ans;
         
     }
 };
-
 
 
 
