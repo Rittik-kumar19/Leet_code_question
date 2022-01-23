@@ -18,33 +18,82 @@
 // };
 
 //isme no of pair puchhta toh -->toh different sochte
+//Using map
+// class Solution {
+// public:
+//     int findPairs(vector<int>& nums, int k) {
+        
+//         int n=nums.size();
+//         unordered_map<int,int>mymap;
+//         int count=0;
+        
+        
+//         for(int i=0;i<n;i++){
+//             mymap[nums[i]]++;
+//         }
+        
+//         if(k==0){
+//             for(auto x:mymap){
+//                 if(x.second>1){
+//                     //Unique k wajah se 1 badha rahe hai
+//                     count++;
+//                 }
+//             }
+//              return count;
+//         }
+    
+//         for(auto x:mymap){
+//             if(mymap.count(x.first-k)){
+//                 //unique k wajah se 1 badha rahe hai
+//                 count++;
+//             }
+//         }
+//         return count;
+//     }
+// };
+
+
+//Using Two pointer
+
 class Solution {
 public:
     int findPairs(vector<int>& nums, int k) {
-        
-        int n=nums.size();
-        unordered_map<int,int>mymap;
-        int count=0;
-        
-        
-        for(int i=0;i<n;i++){
-            mymap[nums[i]]++;
-        }
-        
-        if(k==0){
-            for(auto x:mymap){
-                if(x.second>1){
-                    count++;
+        int n = nums.size();
+        sort(nums.begin(),nums.end());
+        int i=0,j=i+1;
+        int ans =0;
+        while(j<n){
+            if(i==j){
+                j++;
+                continue;
+            }
+            int x = nums[i];
+            int y = nums[j];
+            if(abs(y-x)==k){
+                i++;
+                j++;
+                ans++;
+                while(i<n and nums[i]==x){
+                    i++;
+                }
+                while(j<n and nums[j]==y){
+                    j++;
                 }
             }
-             return count;
-        }
-    
-        for(auto x:mymap){
-            if(mymap.count(x.first-k)){
-                count++;
+            else if(abs(y-x)>k){
+                i++;
+                while(i<n and nums[i]==x){
+                    i++;
+                }
             }
+            else if(abs(y-x)<k){
+                j++;
+                while(j<n and nums[j]==y){
+                    j++;
+                }
+            }
+            
         }
-        return count;
+        return ans;
     }
 };
