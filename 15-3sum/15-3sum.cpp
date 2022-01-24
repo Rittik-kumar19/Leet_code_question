@@ -135,15 +135,15 @@ public:
                 }
                 else if(nums[lo]+nums[hi]<sum){
                     lo++;
-                    // while(lo<hi and nums[lo]==x){
-                    //         lo++;
-                    // }
+                    while(lo<hi and nums[lo]==x){
+                            lo++;
+                    }
                 }
                 else if(nums[lo]+nums[hi]>sum){
                     hi--;
-                    // while(lo<hi and nums[hi]==y){
-                    //         hi--;
-                    // }
+                    while(lo<hi and nums[hi]==y){
+                            hi--;
+                    }
                 }
                 }
             }
