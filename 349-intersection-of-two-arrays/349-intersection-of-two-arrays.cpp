@@ -30,8 +30,8 @@ public:
      sort(nums1.begin(),nums1.end());
         sort(nums2.begin(),nums2.end());
         vector<int>v;
-        int i=0,j=0;
-        while(i<m and j<n){
+        // int i=0,j=0;
+        for(int i=0,j=0;i<m and j<n;){
             if(nums1[i]==nums2[j]){
                 int val = nums1[i];
                 v.push_back(val);
