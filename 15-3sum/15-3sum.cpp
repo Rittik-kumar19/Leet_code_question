@@ -118,8 +118,11 @@ public:
             if((i==0) or (i>0 and nums[i-1]!=nums[i])){
                 int lo=i+1,hi=n-1,sum=0-nums[i];
                 while(lo<hi){
-                    if((nums[lo]+nums[hi])==sum){
+                    int x = nums[lo];
+                    int y = nums[hi];
+                    if((x+y)==sum){
                     vector<int>temp = {nums[i],nums[lo],nums[hi]};
+                    // lo++,hi--;
                     // sort(temp.begin(),temp.end());
                     final.push_back(temp);
                     while(lo<hi and nums[lo]==nums[lo+1]){
@@ -132,9 +135,15 @@ public:
                 }
                 else if(nums[lo]+nums[hi]<sum){
                     lo++;
+                    // while(lo<hi and nums[lo]==x){
+                    //         lo++;
+                    // }
                 }
                 else if(nums[lo]+nums[hi]>sum){
                     hi--;
+                    // while(lo<hi and nums[hi]==y){
+                    //         hi--;
+                    // }
                 }
                 }
             }
