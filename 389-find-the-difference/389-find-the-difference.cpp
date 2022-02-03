@@ -12,18 +12,28 @@ public:
         //     i++;
         // }
         // return '-1';
-        map<char,int>mp;
-        for(auto ch1:s){
-            mp[ch1]++;
+        // map<char,int>mp;
+        // for(auto ch1:s){
+        //     mp[ch1]++;
+        // }
+        // for(auto ch2:t){
+        //     mp[ch2]++;
+        // }
+        // for(auto m:mp){
+        //     if(m.second%2!=0){
+        //         return m.first;
+        //     }
+        // }
+        // return '-1';
+        int temp = 0;
+        for(auto it:t){
+            temp = temp^(int)(it-'a');
         }
-        for(auto ch2:t){
-            mp[ch2]++;
+        for(auto it1:s){
+            temp = temp^(int)(it1-'a');
         }
-        for(auto m:mp){
-            if(m.second%2!=0){
-                return m.first;
-            }
-        }
-        return '-1';
+        char ans = temp+'a';
+        return ans;
+        
     }
 };
