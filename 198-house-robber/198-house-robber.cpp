@@ -3,9 +3,6 @@ class Solution {
     public:
        int dp[1000];
        int solve(vector<int>&v, int n){
-        // if(n==0){
-        //     return 0;
-        // }
         if(n==1){
             dp[n]=v[0];
             return dp[n];
