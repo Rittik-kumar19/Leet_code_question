@@ -14,9 +14,9 @@ public:
                 return true;
             }
             for(auto vp:adj[x]){
-                // if(vis[vp] and vp==dn){
-                //     return true;
-                // }
+                if(vis[vp] and vp==dn){
+                    return true;
+                }
                 if(!vis[vp]){
                     q.push(vp);
                     vis[vp]=1;
