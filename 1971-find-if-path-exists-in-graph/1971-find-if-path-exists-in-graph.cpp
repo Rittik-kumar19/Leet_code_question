@@ -29,6 +29,8 @@ public:
         
         
         // int n = edges.size();
+        
+        //First Form adjacency list
         vector<int>adj[n];
         for(int i=0;i<edges.size();i++){
             int u = edges[i][0];
@@ -37,6 +39,7 @@ public:
             adj[v].push_back(u);
         }
         vector<int>vis(n,0);
+        //BFS laga do
         for(int i=0;i<n;i++){
             if(vis[i]==0){
                 if(BFS(n,adj,sc,dn,vis)){
