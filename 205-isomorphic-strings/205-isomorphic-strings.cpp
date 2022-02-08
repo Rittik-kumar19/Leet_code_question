@@ -4,14 +4,16 @@ public:
         if(s.size()!=t.size()){
             return false;
         }
-        unordered_map<char,char>mp;
-        unordered_map<char,char>mpp;
+        map<char,char>mp;
+        map<char,char>mpp;
         for(int i=0;i<s.size();i++){
             mp[s[i]]=t[i];
         }
         for(int i=0;i<t.size();i++){
             mpp[t[i]]=s[i];
         }
+        cout<<mp.size()<<endl;
+        cout<<mpp.size()<<endl;
         string ans = "";
         for(int i=0;i<s.size();i++){
             ans += mp[s[i]];
@@ -20,6 +22,7 @@ public:
         for(int i=0;i<t.size();i++){
             anss+=mpp[t[i]];
         }
+        cout<<ans<<"  "<<anss<<endl;
         if(ans==t and anss==s){
             return true;
         }
